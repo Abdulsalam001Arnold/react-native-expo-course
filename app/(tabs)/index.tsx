@@ -123,26 +123,19 @@ export default function HomeScreen() {
       </View>
 
         <Text style={{ marginBottom: 10, fontSize: 18 }}>Enter your age:</Text>
+        
         <KeyboardAvoidingView
-      style={{flex: 1, justifyContent: "center", padding: 20 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
-      >
-        <TextInput
-          style={{
-            borderWidth: 1,
-            borderColor: '#ccc',
-            padding: 10,
-            borderRadius: 8,
-          }}
-          placeholder="Type age here..."
+        className="flex-1 justify-center p-5"
+        >
+          <TextInput
           keyboardType="numeric"
           value={age}
           onChangeText={setAge}
-        />
-      </KeyboardAvoidingView>
-        <Text>
-          You are {age} years old.
-        </Text>
+          placeholder="Enter your age here"
+          className="border-[3px] border-black p-3 rounded-lg mb-5"
+          />
+        </KeyboardAvoidingView>
+        
 
       <TextInput
       multiline
@@ -154,6 +147,31 @@ export default function HomeScreen() {
       }}
       />
 
+<KeyboardAvoidingView
+      style={{ flex: 1, justifyContent: "center", padding: 20 }}
+      behavior={Platform.OS === "ios" ? "padding" : "position"}
+      keyboardVerticalOffset={100}
+    >
+      <TextInput
+        value={name}
+        onChangeText={setName}
+        placeholder="Type something..."
+        style={{
+          borderWidth: 1,
+          borderColor: "#ccc",
+          borderRadius: 8,
+          padding: 12,
+          marginBottom: 20,
+        }}
+      />
+      <Pressable onPress={() => alert(name)} >
+        <Text>
+          Show
+        </Text>
+      </Pressable>
+    </KeyboardAvoidingView>
+
+      
     </ScrollView>
   </SafeAreaView>
   );
