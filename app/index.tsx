@@ -3,6 +3,7 @@
 import { View, SafeAreaView, Image, ImageBackground, ScrollView, Pressable, TouchableOpacity, ActivityIndicator, StyleSheet, StatusBar, Text, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import React, {useState} from "react";
 import { TextInput } from "react-native-gesture-handler";
+import { Link } from "expo-router";
 
 const localImage = require('@/assets/images/error-404.png')
 
@@ -171,6 +172,9 @@ export default function HomeScreen() {
       </Pressable>
     </KeyboardAvoidingView>
 
+        <Link href={'/explore'}>
+        Go to explore
+        </Link>
       
     </ScrollView>
   </SafeAreaView>

@@ -1,11 +1,18 @@
 
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import Form from "@/components/Form";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ProfileCard from "@/components/ProfileCard";
 
 export default function TabTwoScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.scrollContent}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss} accessible={false}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.scrollContent}
+    enableOnAndroid={true}
+    extraScrollHeight={20}
+    keyboardShouldPersistTaps="handled"
+    keyboardOpeningTime={0}
+    >
       <Text style={styles.title}>
           Hello Mobile!
       </Text>
@@ -19,7 +26,8 @@ export default function TabTwoScreen() {
       <Form/>
 
       <ProfileCard/>
-    </ScrollView>
+    </KeyboardAwareScrollView>
+    </TouchableWithoutFeedback>
   );
 }
 

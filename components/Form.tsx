@@ -1,13 +1,11 @@
 
-import { KeyboardAvoidingView, TextInput, ScrollView, Platform, StyleSheet, Text,   Pressable } from "react-native";
+import { KeyboardAvoidingView, TextInput, ScrollView, Platform, StyleSheet, Text, View,Pressable } from "react-native";
 
 
 export default function Form() {
-    
     return(
-        <KeyboardAvoidingView
+        <View
         style={{flex: 1, justifyContent: "center", padding: 20, alignItems: "center"}}
-        behavior={Platform.OS === "ios" ? "padding" : "padding"}
         >
                 <Text>
                     Form
@@ -58,7 +56,7 @@ export default function Form() {
                             Submit
                         </Text>
                     </Pressable>
-        </KeyboardAvoidingView>
+        </View>
     )
 };
 
