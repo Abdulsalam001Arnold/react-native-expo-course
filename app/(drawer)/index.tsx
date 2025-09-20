@@ -1,6 +1,6 @@
 
 
-import { View, SafeAreaView, Image, ImageBackground, ScrollView, Pressable, TouchableOpacity, ActivityIndicator, StyleSheet, StatusBar, Text, FlatList, KeyboardAvoidingView, Platform } from "react-native";
+import { View, SafeAreaView, Image, ImageBackground, ScrollView, Pressable, TouchableOpacity, ActivityIndicator, StyleSheet, StatusBar, Text, FlatList, KeyboardAvoidingView, Platform, Button } from "react-native";
 import React, {useState} from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { Link } from "expo-router";
@@ -172,8 +172,12 @@ export default function HomeScreen() {
       </Pressable>
     </KeyboardAvoidingView>
 
-        <Link href={'/explore'}>
-        Go to explore
+    <Link href={'/explore'} asChild>
+        <Button title="Explore"/>
+    </Link>
+
+        <Link href={{pathname: "/profile", params: {user: "Abdul Larry"}}} style={{marginBottom: 40}}>
+        Go to profile
         </Link>
       
     </ScrollView>

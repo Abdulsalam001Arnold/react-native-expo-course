@@ -38,6 +38,7 @@ export default function ProfileCard() {
   const player = useVideoPlayer(videoSource, play => {
     play.loop = true;
     play.play();
+    play.muted = true;
   })
   const {isPlaying} = useEvent(player, "playingChange", {isPlaying: player.playing})
   return (

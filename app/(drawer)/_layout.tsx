@@ -1,0 +1,40 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "react-native-reanimated";
+import { Drawer } from "expo-router/drawer";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function RootLayout() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer>
+        <Drawer.Screen
+          name="index"
+          options={{
+            title: "Home",
+            drawerIcon: ({ color, focused, size }) => (
+              <Ionicons
+                name={focused ? "home" : "home-outline"}
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            drawerIcon: ({ color, focused, size }) => (
+              <Ionicons
+                name={focused ? "person" : "person-outline"}
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Drawer>
+    </GestureHandlerRootView>
+  );
+}
