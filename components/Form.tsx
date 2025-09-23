@@ -1,69 +1,57 @@
 
-import { KeyboardAvoidingView, TextInput, ScrollView, Platform, StyleSheet, Text, View,Pressable } from "react-native";
+import  * as yup from 'yup'
+import {Formik} from 'formik'
+import { Alert, Text, View, Pressable, Button } from 'react-native'
+import { TextInput } from 'react-native-gesture-handler'
+import { FormEvent } from 'react'
 
 
+const validationSchema = yup.object().shape({
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().min(4, "Password must be at least 4 characters").required("Password is required"),
+})
 export default function Form() {
     return(
-        <View
-        style={{flex: 1, justifyContent: "center", padding: 20, alignItems: "center"}}
+        <Formik
+        initialValues={{email: "", password: ""}}
+        validationSchema={validationSchema}
+        onSubmit={(values) => (
+            Alert.alert(JSON.stringify(values, null, 2))
+        )}
         >
-                <Text>
-                    Form
-                </Text>
-
-                <TextInput
-                    placeholder="Your name is..."
-                    style={{
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        borderRadius: 8,
-                        padding: 12,
-                        marginBottom: 20,
-                        width: "100%"
-                    }}
-                    />
-
+            {({handleChange, values, errors, handleSubmit}) => (
+                <View
+                style={{padding: 20}}
+                >
                     <TextInput
-                    keyboardType="email-address"
-                    placeholder="Enter your e-mail"
-                    style={{
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        borderRadius: 8,
-                        padding: 12,
-                        marginBottom: 20,
-                        width: "100%"
-                    }}
+                    keyboardType='email-address'
+                    value={values.email}
+                    onChangeText={handleChange("email")}
+                    style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, borderRadius: 8 }}
                     />
+                    {errors && errors.email && (<Text style={{ color: 'red', marginBottom: 10 }}>{errors.email}</Text>)}
 
                     <TextInput
                     secureTextEntry
-                    placeholder="Enter your password"
-                    style={{
-                        borderWidth: 1,
-                        borderColor: "#ccc",
-                        borderRadius: 8,
-                        padding: 12,
-                        marginBottom: 20,
-                        width: "100%"
-                    }}
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 10, borderRadius: 8 }}
                     />
+                    {errors && errors.password && (<Text style={{ color: 'red', marginBottom: 10 }}>{errors.password}</Text>)}
+
 
                     <Pressable
-                    onPress={() => alert("Form submitted!")}
+                    onPress={() => handleSubmit}
                     >
-                        <Text>
+                        <Text
+                        
+                        style={{ backgroundColor: 'black', color: 'white', padding: 15, textAlign: 'center', borderRadius: 8 }}
+                        >
                             Submit
                         </Text>
                     </Pressable>
-        </View>
+                </View>
+            )}
+        </Formik>
     )
 };
-
-const styles = StyleSheet.create({
-    scrollContent: {
-        flexGrow: 1,
-        justifyContent: "center",
-        padding: 20
-    }
-})

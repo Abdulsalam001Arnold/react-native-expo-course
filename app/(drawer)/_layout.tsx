@@ -18,11 +18,12 @@ export default function RootLayout() {
                 color={color}
               />
             ),
+            headerTitle: "Landing"
           }}
         />
 
         <Drawer.Screen
-          name="profile"
+          name="profile/[id]"
           options={{
             title: "Profile",
             drawerIcon: ({ color, focused, size }) => (

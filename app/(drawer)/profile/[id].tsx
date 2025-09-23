@@ -1,13 +1,14 @@
 
-import { StyleSheet, View, Text, ScrollView, TouchableWithoutFeedback, Keyboard } from "react-native";
+
+
+import { StyleSheet, View, Text, ScrollView, TouchableWithoutFeedback, Keyboard,Switch } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Link } from "expo-router";
-import Form from "@/components/Form";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ProfileCard from "@/components/ProfileCard";
 
 export default function TabTwoScreen() {
-  const {user} = useLocalSearchParams()
+  const {id} = useLocalSearchParams()
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss} accessible={false}>
     <KeyboardAwareScrollView contentContainerStyle={styles.scrollContent}
@@ -17,7 +18,7 @@ export default function TabTwoScreen() {
     keyboardOpeningTime={0}
     >
       <Text style={styles.title}>
-          Hello {user}
+          Hello Profile with ID - {id}
       </Text>
 
       <View style={{marginTop: 30, flex: 1, flexDirection: "row", justifyContent: "center", alignContent: "center", gap: 10}}>
@@ -25,8 +26,8 @@ export default function TabTwoScreen() {
         <View style={{width: 100, height: 100, backgroundColor: "blue"}}/>
         <View style={{width: 100, height: 100, backgroundColor: "green"}}/>
       </View>
+      <Switch/>
 
-      <Form/>
 
       <ProfileCard/>
     </KeyboardAwareScrollView>

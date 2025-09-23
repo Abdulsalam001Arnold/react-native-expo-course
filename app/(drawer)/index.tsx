@@ -1,9 +1,11 @@
 
 
-import { View, SafeAreaView, Image, ImageBackground, ScrollView, Pressable, TouchableOpacity, ActivityIndicator, StyleSheet, StatusBar, Text, FlatList, KeyboardAvoidingView, Platform, Button } from "react-native";
-import React, {useState} from "react";
+import { View, SafeAreaView, Image, ImageBackground, ScrollView, Pressable, TouchableOpacity, ActivityIndicator, StyleSheet, StatusBar, Text, FlatList, KeyboardAvoidingView, Platform, Button, Alert } from "react-native";
+import React, {useState, useEffect} from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { Link } from "expo-router";
+import Counter from "@/components/Counter";
+import Card from "@/components/Card";
 
 const localImage = require('@/assets/images/error-404.png')
 
@@ -16,13 +18,44 @@ const users = [
 ];
 
 export default function HomeScreen() {
-  const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(false)
   const [name, setName] = useState('')
+  const [users, setUsers] = useState([])
   const [password, setPassword] = useState('')
   const [age, setAge] = useState('')
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch("https://archbuild-api.vercel.app/api/peopleList")
+        if(!response.ok) {
+          Alert.alert("Error fetching data")
+        }
+        const data = await response.json()
+        console.log(data)
+        setUsers(data.data)
+        if(loading) return
+          <ActivityIndicator size="large" color="#0000ff" />
+        
+      } catch (err) {
+        
+      }finally{
+        setLoading(false)
+      }
+    }
 
+    fetchData()
+  }, [])
+
+  const renderItem = ({ item }: any) => (
+   <Card
+   name={item.name}
+   image={item.image}
+    post={item.post}
+    paragraph={item.paragraph}
+   />
+  );
   const [enabled, setEnabled] = useState(false)
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f1f5f9' }}>
@@ -57,19 +90,7 @@ export default function HomeScreen() {
         </View>
       </ImageBackground>
 
-      {[...Array(30)].map((_, i) => (
-        <Text key={i}>Item {i + 1}</Text>
-      ))}
 
-      <FlatList
-        data={users}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.name}</Text>
-          </View>
-        )}
-      />
 
       <Pressable
         onPress={() => alert('Clicked')}
@@ -172,13 +193,17 @@ export default function HomeScreen() {
       </Pressable>
     </KeyboardAvoidingView>
 
-    <Link href={'/explore'} asChild>
-        <Button title="Explore"/>
+    <Link href={{pathname: "/(drawer)/profile/[id]", params: { id: "123" }}} asChild>
+        <Button title="Open Profile with id 123"/>
     </Link>
 
-        <Link href={{pathname: "/profile", params: {user: "Abdul Larry"}}} style={{marginBottom: 40}}>
-        Go to profile
-        </Link>
+    <Counter/>
+
+        <FlatList
+        data={users}
+        renderItem={renderItem}
+        keyExtractor={(item: any) => item.id}
+        />
       
     </ScrollView>
   </SafeAreaView>

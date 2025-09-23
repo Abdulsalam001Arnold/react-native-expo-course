@@ -1,5 +1,5 @@
 
-import { ScrollView, Text } from "react-native"
+import { ScrollView, Text, Switch } from "react-native"
 
 export default function HomeScreen() {
     return(
@@ -7,6 +7,7 @@ export default function HomeScreen() {
             <Text>
                 Tabs 1 - homepage
             </Text>
+
         </ScrollView>
     )
 };
