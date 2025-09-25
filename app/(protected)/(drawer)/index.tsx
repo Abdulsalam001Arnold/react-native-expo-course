@@ -6,6 +6,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import Counter from "@/components/Counter";
 import Card from "@/components/Card";
+import { useUser } from "@clerk/clerk-expo";
 
 const localImage = require('@/assets/images/error-404.png')
 
@@ -23,6 +24,7 @@ export default function HomeScreen() {
   const [users, setUsers] = useState([])
   const [password, setPassword] = useState('')
   const [age, setAge] = useState('')
+  const {user} = useUser()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +35,7 @@ export default function HomeScreen() {
           Alert.alert("Error fetching data")
         }
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         setUsers(data.data)
         if(loading) return
           <ActivityIndicator size="large" color="#0000ff" />
@@ -62,7 +64,7 @@ export default function HomeScreen() {
     <ScrollView contentContainerStyle={{ padding: 20 }}>
       <StatusBar barStyle={'light-content'} />
 
-      <Text style={styles.heading}>Welcome to RN</Text>
+      <Text style={styles.heading}>Welcome to RN {user?.firstName}</Text>
 
       <View style={styles.card}>
         <Text>Hello In this card</Text>
@@ -90,6 +92,11 @@ export default function HomeScreen() {
         </View>
       </ImageBackground>
 
+    <Link href={'/explore/settings'} asChild>
+    <Text>
+      Go to Settings page
+    </Text>
+    </Link>
 
 
       <Pressable
@@ -193,7 +200,7 @@ export default function HomeScreen() {
       </Pressable>
     </KeyboardAvoidingView>
 
-    <Link href={{pathname: "/(drawer)/profile/[id]", params: { id: "123" }}} asChild>
+    <Link href={{pathname: "/(protected)/(drawer)/profile/[id]", params: { id: "123" }}} asChild>
         <Button title="Open Profile with id 123"/>
     </Link>
 

@@ -6,6 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "practice",
+    "extra": {
+      "clerkPublishableKey": "pk_test_am9pbnQtdGhydXNoLTQ4LmNsZXJrLmFjY291bnRzLmRldiQ"
+    },
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -40,7 +43,8 @@
           "supportBackgroundPlayback": true,
           "supportpictureinpicture": true
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true

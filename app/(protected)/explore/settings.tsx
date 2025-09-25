@@ -1,5 +1,6 @@
 
 import { ScrollView, View, Text } from "react-native";
+import Form from '@/components/Form'
 
 export default function settings() {
     return(
@@ -7,6 +8,8 @@ export default function settings() {
         <Text>
             This is the settings page - Tabs 1
         </Text>
+
+        <Form/>
     </ScrollView>
     )
 };

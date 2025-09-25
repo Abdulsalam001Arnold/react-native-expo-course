@@ -3,6 +3,7 @@ import  * as yup from 'yup'
 import {Formik} from 'formik'
 import { Alert, Text, View, Pressable, Button } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { FormEvent } from 'react'
 
 
@@ -12,6 +13,9 @@ const validationSchema = yup.object().shape({
 })
 export default function Form() {
     return(
+        <KeyboardAwareScrollView
+        contentContainerStyle={{flexGrow: 1, justifyContent: "center"}}
+        >
         <Formik
         initialValues={{email: "", password: ""}}
         validationSchema={validationSchema}
@@ -53,5 +57,7 @@ export default function Form() {
                 </View>
             )}
         </Formik>
+
+        </KeyboardAwareScrollView>
     )
 };
