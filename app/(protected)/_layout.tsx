@@ -9,7 +9,7 @@ export default function ProtectedLayout() {
     if(!isLoaded) return null;
     
     if(!isSignedIn) {
-        return <Redirect href={"/(auth)/sign-up"}/>
+        return <Redirect href={"/(auth)/sign-in"}/>
     }
         return (
             <GestureHandlerRootView style={{flex: 1}}>

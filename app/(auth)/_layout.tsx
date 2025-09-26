@@ -17,6 +17,7 @@ export default function AuthRoutesLayout() {
   }
 
   return (
+    <GestureHandlerRootView>
       <SafeAreaView style={{flex: 1, paddingTop: inset.top, paddingLeft: inset.left, paddingRight: inset.right}}>
       <Stack
       screenOptions={{
@@ -24,6 +25,6 @@ export default function AuthRoutesLayout() {
       }}
       />
       </SafeAreaView>
-
+    </GestureHandlerRootView>
   )
 }
