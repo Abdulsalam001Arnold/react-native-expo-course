@@ -16,6 +16,7 @@ import { useSSO } from "@clerk/clerk-expo";
 import * as AuthSession from "expo-auth-session";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
+import * as ExpoSecure from "expo-secure-store"
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -44,6 +45,9 @@ export default function Page() {
         signInAttempt.createdSessionId
       ) {
         await setActive({ session: signIn.createdSessionId });
+          if (signIn.createdSessionId) {
+            await ExpoSecure.setItemAsync("session", signIn.createdSessionId);
+          }
         router.replace("/");
       }
     } catch (err) {
@@ -68,6 +72,7 @@ export default function Page() {
       });
       if (createdSessionId) {
         await setSSOActive!({ session: createdSessionId });
+        await ExpoSecure.setItemAsync("session", createdSessionId);
       }
       router.replace("/");
     } catch (err) {

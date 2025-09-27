@@ -61,7 +61,7 @@ export default function HomeScreen() {
   const [enabled, setEnabled] = useState(false)
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f1f5f9' }}>
-    <ScrollView contentContainerStyle={{ padding: 20 }}>
+    <ScrollView contentContainerStyle={{ padding: 20, flexGrow: 1 }}>
       <StatusBar barStyle={'light-content'} />
 
       <Text style={styles.heading}>Welcome to RN {user?.firstName}</Text>
@@ -75,6 +75,12 @@ export default function HomeScreen() {
           Hello In this card Lorem ipsum dolor sit amet consectetur...
         </Text>
       </View>
+
+      <Link href={"/(protected)/explore"} asChild>
+      <Text>
+        Go to explore tab
+      </Text>
+      </Link>
 
       <Image
         style={styles.local}

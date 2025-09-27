@@ -1,4 +1,5 @@
 import { Link, useRouter } from "expo-router";
+import * as ExpoSecure from 'expo-secure-store'
 import {
   Text,
   TextInput,
@@ -63,6 +64,9 @@ export default function SignUpScreen() {
         signupAttempt.createdSessionId
       ) {
         await setActive({ session: signupAttempt.createdSessionId });
+        if(signupAttempt.createdSessionId) {
+          await ExpoSecure.setItemAsync("session", signupAttempt.createdSessionId)
+        }
         router.replace("/");
       } else {
         console.warn("Verification pending:", signupAttempt);
@@ -110,6 +114,7 @@ export default function SignUpScreen() {
 
       if (createdSessionId) {
         await setSSOActive!({ session: createdSessionId });
+        await ExpoSecure.setItemAsync("session", createdSessionId)
         router.replace("/");
         return;
       }

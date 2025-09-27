@@ -1,5 +1,7 @@
 
 import { ScrollView, Text, Switch } from "react-native"
+import ImagePickerSetup from "@/components/ImagePicker"
+import LocalNotification from "@/components/LocalNotification"
 
 export default function HomeScreen() {
     return(
@@ -7,6 +9,10 @@ export default function HomeScreen() {
             <Text>
                 Tabs 1 - homepage
             </Text>
+
+            <ImagePickerSetup/>
+
+            <LocalNotification/>
 
         </ScrollView>
     )
